@@ -35,15 +35,19 @@ public class MainActivity extends AppCompatActivity {
     public void moveHome() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mHomeFragment).commit();
     }
+
     public void moveCategory() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mCategoryFragment).commit();
     }
+
     public void moveWriting() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mWritingFragment).commit();
     }
+
     public void moveChat() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mChatFragment).commit();
     }
+
     public void moveProfile() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mProfileFragment).commit();
     }

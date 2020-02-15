@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ddangnmarket</string>
+    <string name="home">홈</string>
+    <string name="category">카테고리</string>
+    <string name="writing">글쓰기</string>
+    <string name="chat">채팅</string>
+    <string name="profile">나의 당근</string>
 </resources>

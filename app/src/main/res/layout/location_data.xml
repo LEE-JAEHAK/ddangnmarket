@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:clickable="true"
-        android:onClick="locationOnClick"
         android:orientation="horizontal">
 
         <TextView
@@ -25,7 +23,7 @@
             android:id="@+id/location_tv_gu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:text="서구"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -34,7 +32,7 @@
             android:id="@+id/location_tv_dong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:text="청라1동"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -43,7 +41,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_centerInParent="true"/>
+        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>
