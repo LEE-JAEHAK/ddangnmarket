@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mWritingFragment = new WritingFragment();
         mChatFragment = new ChatFragment();
         mProfileFragment = new ProfileFragment();
+
+        moveHome();
     }
 
     public void moveHome() {
