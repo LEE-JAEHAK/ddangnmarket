@@ -17,7 +17,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void intentToLocationActivity(){
-        Intent intent = new Intent(StartActivity.this,LocationSettingActivity.class);
+        Intent intent = new Intent(StartActivity.this, LocationSettingActivity.class);
         startActivity(intent);
         finish();
     }

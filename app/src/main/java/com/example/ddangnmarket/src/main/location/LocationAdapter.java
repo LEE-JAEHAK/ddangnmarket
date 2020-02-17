@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.main;
+package com.example.ddangnmarket.src.main.location;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ddangnmarket.R;
+import com.example.ddangnmarket.src.main.MainActivity;
 
 import java.util.ArrayList;
 
@@ -62,7 +63,7 @@ public class LocationAdapter extends BaseAdapter {
     }
 
     public void intentToMain(){
-        Intent intent = new Intent(mContext,MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         mContext.startActivity(intent);
     }
 }

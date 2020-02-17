@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.ddangnmarket.R;
+import com.example.ddangnmarket.src.main.location.Location;
+import com.example.ddangnmarket.src.main.location.LocationAdapter;
 
 import java.util.ArrayList;
 

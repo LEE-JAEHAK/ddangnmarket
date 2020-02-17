@@ -14,7 +14,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginStart="5dp"
             android:src="@drawable/icon_search"
             android:contentDescription="@string/app_name"/>
@@ -22,9 +22,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="30dp"
             android:inputType="text"
-            android:autofillHints="@string/app_name"
-            android:hint="       내 동네 이름(동,읍,면)으로 검색"/>
+            android:hint="내 동네 이름(동,읍,면)으로 검색"/>
     </RelativeLayout>
 
     <Button
