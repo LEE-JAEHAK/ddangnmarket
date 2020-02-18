@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.main;
+package com.example.ddangnmarket.src.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.ddangnmarket.R;
+import com.example.ddangnmarket.src.location.StartActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".src.main.ProductInformation">
+    tools:context=".src.main.home.product.ProductInformation">
 
-    <ImageView
-        android:id="@+id/product_information_iv"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:src="@drawable/default_error"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/product_information_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/product_information_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            app:ci_drawable="@drawable/black_radius"
+            app:ci_height="7dp"
+            app:ci_margin="4dp"
+            app:ci_width="7dp" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/product_information_tv_product_name"

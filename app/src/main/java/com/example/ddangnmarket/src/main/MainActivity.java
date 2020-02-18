@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ddangnmarket.R;
-import com.example.ddangnmarket.src.main.fragment.CategoryFragment;
-import com.example.ddangnmarket.src.main.fragment.ChatFragment;
-import com.example.ddangnmarket.src.main.fragment.HomeFragment;
-import com.example.ddangnmarket.src.main.fragment.ProfileFragment;
-import com.example.ddangnmarket.src.main.fragment.WritingFragment;
+import com.example.ddangnmarket.src.main.category.CategoryFragment;
+import com.example.ddangnmarket.src.main.chat.ChatFragment;
+import com.example.ddangnmarket.src.main.home.HomeFragment;
+import com.example.ddangnmarket.src.main.profile.ProfileFragment;
+import com.example.ddangnmarket.src.main.writing.WritingFragment;
 
 public class MainActivity extends AppCompatActivity {
 

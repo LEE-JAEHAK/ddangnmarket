@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.main.fragment;
+package com.example.ddangnmarket.src.main.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,12 +9,9 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.ddangnmarket.R;
-import com.example.ddangnmarket.src.main.Item.Items;
-import com.example.ddangnmarket.src.main.Item.ItemsAdapter;
 import com.example.ddangnmarket.src.main.MainActivity;
 
 import java.util.ArrayList;
@@ -46,7 +43,8 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < 9; i++) {
             mItemsArrayList.add(new Items("아이폰" + (i + 1), "서구", "청라" + i + "동",
-                    i * 100000000, ContextCompat.getDrawable(activity, R.drawable.default_error)));
+                    i * 100000000,
+                    "https://previews.123rf.com/images/utima/utima1602/utima160200076/53405200-%EB%8B%B9%EA%B7%BC-%EC%95%BC%EC%B1%84%EC%9D%98-%ED%9E%99-%ED%99%94%EC%9D%B4%ED%8A%B8%EC%97%90-%EA%B2%A9%EB%A6%AC.jpg"));
         }
 
         mLvItemsList.setAdapter(itemsAdapter);

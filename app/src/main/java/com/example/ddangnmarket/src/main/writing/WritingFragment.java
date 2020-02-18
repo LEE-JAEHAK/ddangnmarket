@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.main.fragment;
+package com.example.ddangnmarket.src.main.writing;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.main.MainActivity;
 
-public class ProfileFragment extends Fragment {
+public class WritingFragment extends Fragment {
     MainActivity activity;
 
     @Override
@@ -31,7 +31,7 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_writing, container, false);
         return view;
     }
 }

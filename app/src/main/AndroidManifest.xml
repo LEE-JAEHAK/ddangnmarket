@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ddangnmarket">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.main.ProductInformation"></activity>
-        <activity android:name=".src.main.LocationSettingActivity" />
-        <activity android:name=".src.main.StartActivity" />
-        <activity android:name=".src.main.SplashActivity">
+        <activity android:name=".src.main.home.product.ProductInformation"></activity>
+        <activity android:name=".src.location.LocationSettingActivity" />
+        <activity android:name=".src.location.StartActivity" />
+        <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

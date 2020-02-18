@@ -1,10 +1,8 @@
-package com.example.ddangnmarket.src.main.Item;
+package com.example.ddangnmarket.src.main.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.ddangnmarket.R;
-import com.example.ddangnmarket.src.main.ProductInformation;
+import com.example.ddangnmarket.src.main.home.product.ProductInformation;
 
-import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -56,7 +54,11 @@ public class ItemsAdapter extends BaseAdapter {
         TextView dong = convertView.findViewById(R.id.home_tv_dong);
         TextView price = convertView.findViewById(R.id.home_tv_price);
 
-        product.setImageDrawable(items.getProduct());
+        Log.d("pro", items.getProduct());
+        Glide.with(mContext).load(items.getProduct()).placeholder(R.drawable.default_error).into(product);
+        //product.setBackground(ContextCompat.getDrawable(mContext,R.drawable.round_shape_background));
+        product.setClipToOutline(true);
+        product.setScaleType(ImageView.ScaleType.FIT_XY);
         name.setText(items.getName());
         gu.setText(items.getGu());
         dong.setText(items.getDong());
@@ -68,7 +70,7 @@ public class ItemsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ProductInformation.class);
-                //intent.putExtra("pic",items.getProduct());
+                intent.putExtra("pic",items.getProduct());
                 intent.putExtra("name",items.getName());
                 mContext.startActivity(intent);
             }

@@ -1,13 +1,10 @@
-package com.example.ddangnmarket.src.main.Item;
-
-import android.graphics.drawable.Drawable;
+package com.example.ddangnmarket.src.main.home;
 
 public class Items {
-    private String name, gu, dong;
+    private String name, gu, dong, product;
     private int price;
-    private Drawable product;
 
-    public Items(String name, String gu, String dong, int price, Drawable product) {
+    public Items(String name, String gu, String dong, int price, String product) {
         this.name = name;
         this.gu = gu;
         this.dong = dong;
@@ -30,7 +27,7 @@ public class Items {
         return price;
     }
 
-    public Drawable getProduct() {
+    public String getProduct() {
         return product;
     }
 }

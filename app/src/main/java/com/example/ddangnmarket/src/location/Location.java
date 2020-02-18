@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.main.location;
+package com.example.ddangnmarket.src.location;
 
 public class Location {
     private String si;
