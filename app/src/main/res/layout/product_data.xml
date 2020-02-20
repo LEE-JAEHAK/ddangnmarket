@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,11 +15,11 @@
             android:id="@+id/home_iv_product_pic"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:contentDescription="@string/app_name"
-            android:background="@drawable/round_shape_background" />
+            android:background="@drawable/round_shape_background"
+            android:contentDescription="@string/app_name" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:orientation="vertical">
@@ -29,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="아이폰 11"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,15 +57,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textStyle="bold"
+                android:text="40,000원"
                 android:textColor="@android:color/black"
-                android:text="40,000원"/>
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/home_iv_reply"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_feed_reply_outline_18" />
+
+                <TextView
+                    android:id="@+id/home_tv_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:text="10"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:id="@+id/home_iv_interest"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_feed_interest_outline_18" />
+
+                <TextView
+                    android:id="@+id/home_tv_interest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/colorGray" />
 
 </LinearLayout>

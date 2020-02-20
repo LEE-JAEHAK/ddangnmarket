@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ public class ProductInformation extends AppCompatActivity {
 
     private ArrayList<String> mImageList;
     ImageView mImageView;
+    ImageButton mBack, mShare, mMore;
     TextView mTextView;
 
     @Override
@@ -28,6 +33,9 @@ public class ProductInformation extends AppCompatActivity {
 
         mImageView = findViewById(R.id.product_information_iv);
         mTextView = findViewById(R.id.product_information_tv_product_name);
+        mBack = findViewById(R.id.product_information_iv_back);
+        mShare = findViewById(R.id.product_information_iv_share);
+        mMore = findViewById(R.id.product_information_iv_more);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -42,9 +50,35 @@ public class ProductInformation extends AppCompatActivity {
         viewPager.setAdapter(new ViewPagerAdapter(this, mImageList));
 
         mTextView.setText(name);
+        mBack.setImageResource(R.drawable.home_as_up);
+        mBack.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
+        mShare.setImageResource(R.drawable.ic_share_outline_24);
+        mShare.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
+        mMore.setImageResource(R.drawable.icon_ads_more);
+        mMore.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
 
         CircleIndicator indicator = findViewById(R.id.product_information_indicator);
         indicator.setViewPager(viewPager);
     }
 
+    public void productInformationOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.product_information_iv_back:
+                onBackPressed();
+                break;
+            case R.id.product_information_iv_share:
+                //share();
+                break;
+            case R.id.product_information_iv_more:
+               // more();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

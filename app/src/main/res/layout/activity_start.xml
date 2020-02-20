@@ -11,8 +11,8 @@
         android:layout_height="36dp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:src="@drawable/onboarding_logo"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/onboarding_logo" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -23,15 +23,15 @@
             android:layout_height="330dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
-            android:src="@drawable/onboarding_town"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/onboarding_town" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/onboarding_pin"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/onboarding_pin" />
 
     </RelativeLayout>
 
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="우리 동네 중고 직거래"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -63,9 +63,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="60dp"
         android:background="@drawable/button_background"
         android:onClick="startOnClick"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="내 동네 설정하고 시작하기"
         android:textColor="@android:color/white"
         android:textSize="20sp"
