@@ -2,6 +2,7 @@ package com.example.ddangnmarket.src.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     WritingFragment mWritingFragment;
     ChatFragment mChatFragment;
     ProfileFragment mProfileFragment;
+    String flag, nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         mWritingFragment = new WritingFragment();
         mChatFragment = new ChatFragment();
         mProfileFragment = new ProfileFragment();
+
+        Intent intent = getIntent();
+        flag = intent.getStringExtra("flag");
+        nickname = intent.getStringExtra("nickname");
 
         moveHome();
     }
@@ -51,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveProfile() {
+        Bundle bundle = new Bundle();
+        bundle.putString("flag", flag);
+        bundle.putString("nickname",nickname);
+        mProfileFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mProfileFragment).commit();
     }
 

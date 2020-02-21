@@ -1,5 +1,6 @@
 package com.example.ddangnmarket.src.location;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class LocationAdapter extends BaseAdapter {
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("dong",location.getDong());
                 mContext.startActivity(intent);
+                ((Activity)mContext).finish();
             }
         });
         return convertView;
