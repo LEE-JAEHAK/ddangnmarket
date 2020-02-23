@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".src.login.LoginActivity">
 
     <LinearLayout
@@ -63,8 +64,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@drawable/border_background"
         android:hint="휴대폰 번호를 입력해주세요"
         android:inputType="phone"
+        android:maxLength="13"
         android:paddingStart="20dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"></EditText>
@@ -87,6 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:background="@drawable/border_background"
         android:hint="인증번호를 입력해주세요"
         android:inputType="number"
         android:paddingStart="20dp"

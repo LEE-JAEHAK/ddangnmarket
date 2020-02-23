@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         Bundle bundle = this.getArguments();
         String flag = bundle.getString("flag");
         String nickname = bundle.getString("nickname");
-        System.out.println(flag);
+        System.out.println("프로파일 플래그" + flag);
 
         if("login".equals(flag)){
             mBtnLogin.setEnabled(false);

@@ -1,7 +1,9 @@
 package com.example.ddangnmarket.src.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,15 +11,16 @@ import android.widget.EditText;
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.login.interfaces.LoginActivityView;
+import com.example.ddangnmarket.src.login.models.RequestJwt;
 import com.example.ddangnmarket.src.login.models.RequestMessage;
 import com.example.ddangnmarket.src.login.models.RequestPhoneCert;
 import com.example.ddangnmarket.src.main.MainActivity;
+import com.example.ddangnmarket.src.nickname.NicknameActivity;
 
 public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     EditText mEtPhoneNumber, mEtPutCert;
     Button mBtnGetCert, mBtnStart;
-    String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         setContentView(R.layout.activity_login);
 
         mEtPhoneNumber = findViewById(R.id.login_et_phone_number);
+        mEtPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mEtPutCert = findViewById(R.id.login_et_put_cert);
         mBtnGetCert = findViewById(R.id.login_btn_get_cert);
         mBtnStart = findViewById(R.id.login_btn_start);
@@ -47,6 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     }
 
     public void getCert() {
+        showProgressDialog();
         LoginService loginService = new LoginService(this);
         RequestMessage requestMessage = new RequestMessage();
         requestMessage.setPhoneNum(mEtPhoneNumber.getText().toString());
@@ -54,6 +59,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     }
 
     public void loginStart() {
+        showProgressDialog();
         LoginService loginService = new LoginService(this);
         RequestPhoneCert requestPhoneCert = new RequestPhoneCert();
         requestPhoneCert.setPhoneNum(mEtPhoneNumber.getText().toString());
@@ -61,8 +67,16 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         loginService.postCert(requestPhoneCert);
     }
 
+    public void getJwt() {
+        LoginService loginService = new LoginService(this);
+        RequestJwt requestJwt = new RequestJwt();
+        requestJwt.setPhoneNum(mEtPhoneNumber.getText().toString());
+        loginService.postJwt(requestJwt);
+    }
+
     @Override
     public void validateMessageSuccess(boolean isSuccess, int code, String message) {
+        hideProgressDialog();
         if (isSuccess == true && code == 100) {
             showCustomToast(message);
         } else if (isSuccess == false && code == 200) {
@@ -72,20 +86,18 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     @Override
     public void validateMessageFailure() {
+        hideProgressDialog();
         showCustomToast("validateMessageFailure");
     }
 
     @Override
     public void validatePhoneCertSuccess(boolean isSuccess, int code, String message) {
         System.out.println(isSuccess + " " + code + " " + message);
+        hideProgressDialog();
         if (isSuccess) {
             String phoneNumber = mEtPhoneNumber.getText().toString();
             if (code == 100) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                showCustomToast(message);
-                intent.putExtra("flag", "login");
-                startActivity(intent);
-                finish();
+                getJwt();
             } else if (code == 101) {
                 Intent intent = new Intent(LoginActivity.this, NicknameActivity.class);
                 showCustomToast(message);
@@ -99,6 +111,36 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     @Override
     public void validatePhoneCertFailure() {
+        hideProgressDialog();
         showCustomToast("validatePhoneCertFailure");
+    }
+
+    @Override
+    public void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt) {
+        hideProgressDialog();
+        if (isSuccess) {
+            if (code == 100) {
+                showCustomToast(message);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("X-ACCESS_TOKEN",jwt);
+                editor.commit();
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("flag", "login");
+                startActivity(intent);
+                finish();
+            } else if (code == 200) {
+                showCustomToast(message);
+            }
+        } else
+            showCustomToast(message);
+    }
+
+    @Override
+    public void validateJwtFailure() {
+        hideProgressDialog();
+        showCustomToast("validateJwtFailure");
     }
 }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".src.location.LocationSettingActivity">
+    android:background="@android:color/white"
+    tools:context=".src.location.LocationActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
             android:contentDescription="@string/app_name"/>
 
         <EditText
+            android:id="@+id/location_et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="30dp"
@@ -28,6 +30,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/location_btn_search"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@drawable/button_background"
@@ -40,6 +43,7 @@
     <ListView
         android:id="@+id/location_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:divider="@android:color/white"/>
 
 </LinearLayout>

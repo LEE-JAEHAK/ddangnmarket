@@ -1,8 +1,7 @@
-package com.example.ddangnmarket.src.login;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.ddangnmarket.src.nickname;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +10,11 @@ import android.widget.TextView;
 
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
-import com.example.ddangnmarket.src.login.interfaces.NicknameActivityView;
-import com.example.ddangnmarket.src.login.models.RequestNickname;
+import com.example.ddangnmarket.src.login.LoginActivity;
+import com.example.ddangnmarket.src.login.LoginService;
+import com.example.ddangnmarket.src.login.models.RequestJwt;
+import com.example.ddangnmarket.src.nickname.interfaces.NicknameActivityView;
+import com.example.ddangnmarket.src.nickname.models.RequestNickname;
 import com.example.ddangnmarket.src.main.MainActivity;
 
 public class NicknameActivity extends BaseActivity implements NicknameActivityView {
@@ -55,17 +57,24 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
         nicknameService.postNickname(requestNickname);
     }
 
+    public void getJwt() {
+        NicknameService nicknameService = new NicknameService(this);
+        RequestJwt requestJwt = new RequestJwt();
+        requestJwt.setPhoneNum(mPhoneNumber);
+        nicknameService.postJwt(requestJwt);
+    }
+
     @Override
     public void validateNicknameSuccess(boolean isSuccess, int code, String message) {
         if (isSuccess && code == 100) {
             showCustomToast(message);
-            Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
-            intent.putExtra("flag","login");
-            intent.putExtra("nickname",mEtNickname.getText().toString());
-            startActivity(intent);
-            finish();
-        }
-        else {
+            getJwt();
+//            Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
+//            intent.putExtra("flag","login");
+//            intent.putExtra("nickname",mEtNickname.getText().toString());
+//            startActivity(intent);
+//            finish();
+        } else {
             showCustomToast(message);
         }
     }
@@ -73,5 +82,34 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
     @Override
     public void validateNicknameFailure() {
         showCustomToast("validateNicknameFailure");
+    }
+
+    @Override
+    public void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt) {
+        hideProgressDialog();
+        if (isSuccess) {
+            if (code == 100) {
+                showCustomToast(message);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("X-ACCESS_TOKEN", jwt);
+                editor.commit();
+
+                Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
+                intent.putExtra("flag", "login");
+                intent.putExtra("nickname", mEtNickname.getText().toString());
+                startActivity(intent);
+                finish();
+            } else if (code == 200) {
+                showCustomToast(message);
+            }
+        } else
+            showCustomToast(message);
+    }
+
+    @Override
+    public void validateJwtFailure() {
+        showCustomToast("validateJwtFailure");
     }
 }

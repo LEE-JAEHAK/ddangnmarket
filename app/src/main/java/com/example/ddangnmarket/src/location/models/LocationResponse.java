@@ -1,8 +1,10 @@
-package com.example.ddangnmarket.src.login.models;
+package com.example.ddangnmarket.src.location.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+import java.util.ArrayList;
+
+public class LocationResponse {
     @SerializedName("code")
     private int code;
 
@@ -13,7 +15,7 @@ public class LoginResponse {
     private boolean isSuccess;
 
     @SerializedName("result")
-    private Result result;
+    private ArrayList<Result> result;
 
     public int getCode() {
         return code;
@@ -27,7 +29,7 @@ public class LoginResponse {
         return isSuccess;
     }
 
-    public Result getResult() {
+    public ArrayList<Result> getResult() {
         return result;
     }
 }

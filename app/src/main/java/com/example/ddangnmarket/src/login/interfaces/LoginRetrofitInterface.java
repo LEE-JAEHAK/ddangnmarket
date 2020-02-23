@@ -1,8 +1,8 @@
 package com.example.ddangnmarket.src.login.interfaces;
 
 import com.example.ddangnmarket.src.login.models.LoginResponse;
+import com.example.ddangnmarket.src.login.models.RequestJwt;
 import com.example.ddangnmarket.src.login.models.RequestMessage;
-import com.example.ddangnmarket.src.login.models.RequestNickname;
 import com.example.ddangnmarket.src.login.models.RequestPhoneCert;
 
 import retrofit2.Call;
@@ -15,4 +15,7 @@ public interface LoginRetrofitInterface {
 
     @POST("/phonecert")
     Call<LoginResponse> postCert(@Body RequestPhoneCert params);
+
+    @POST("/jwt")
+    Call<LoginResponse> postJwt(@Body RequestJwt params);
 }

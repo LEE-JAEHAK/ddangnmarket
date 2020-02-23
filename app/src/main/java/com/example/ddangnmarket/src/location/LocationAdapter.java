@@ -10,17 +10,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ddangnmarket.R;
-import com.example.ddangnmarket.src.location.Location;
+import com.example.ddangnmarket.src.location.models.Result;
 import com.example.ddangnmarket.src.main.MainActivity;
 
 import java.util.ArrayList;
 
 public class LocationAdapter extends BaseAdapter {
-    private ArrayList<Location> mLocationList;
+    private ArrayList<Result> mLocationList;
     private LayoutInflater mInflater;
     private Context mContext;
 
-    public LocationAdapter(ArrayList<Location> mLocationList, Context mContext) {
+    public LocationAdapter(ArrayList<Result> mLocationList, Context mContext) {
         this.mLocationList = mLocationList;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mContext = mContext;
@@ -44,20 +44,17 @@ public class LocationAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = mInflater.inflate(R.layout.location_data, parent, false);
-        final Location location = mLocationList.get(position);
+        final Result location = mLocationList.get(position);
 
-        TextView tvSi = convertView.findViewById(R.id.location_tv_si);
-        TextView tvGu = convertView.findViewById(R.id.location_tv_gu);
-        TextView tvDong = convertView.findViewById(R.id.location_tv_dong);
+        TextView mTvLocation = convertView.findViewById(R.id.location_tv);
 
-        tvSi.setText(location.getSi());
-        tvGu.setText(location.getGu());
-        tvDong.setText(location.getDong());
+        mTvLocation.setText(location.getAddress());
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("dong",location.getDong());
+                //intent.putExtra("dong",location.getDong());
                 mContext.startActivity(intent);
                 ((Activity)mContext).finish();
             }

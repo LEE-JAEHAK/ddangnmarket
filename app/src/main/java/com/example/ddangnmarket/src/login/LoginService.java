@@ -3,6 +3,7 @@ package com.example.ddangnmarket.src.login;
 import com.example.ddangnmarket.src.login.interfaces.LoginActivityView;
 import com.example.ddangnmarket.src.login.interfaces.LoginRetrofitInterface;
 import com.example.ddangnmarket.src.login.models.LoginResponse;
+import com.example.ddangnmarket.src.login.models.RequestJwt;
 import com.example.ddangnmarket.src.login.models.RequestMessage;
 import com.example.ddangnmarket.src.login.models.RequestPhoneCert;
 
@@ -56,6 +57,29 @@ public class LoginService {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 mLoginActivityView.validatePhoneCertFailure();
+            }
+        });
+    }
+
+    void postJwt(RequestJwt requestJwt) {
+        final LoginRetrofitInterface loginRetrofitInterface = getRetrofit().create(LoginRetrofitInterface.class);
+        loginRetrofitInterface.postJwt(requestJwt).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                final LoginResponse loginResponse = response.body();
+                if (loginResponse == null) {
+                    System.out.println("리스폰스가 눌값");
+                    mLoginActivityView.validateJwtFailure();
+                    return;
+                }
+                System.out.println("썩쎄스");
+                mLoginActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult().getJwt());
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                System.out.println("온페일리어");
+                mLoginActivityView.validateJwtFailure();
             }
         });
     }

@@ -11,16 +11,16 @@ import okhttp3.Response;
 import static com.example.ddangnmarket.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
 
-//public class XAccessTokenInterceptor implements Interceptor {
-//
-//    @Override
-//    @NonNull
-//    public Response intercept(@NonNull final Interceptor.Chain chain) throws IOException {
-//        final Request.Builder builder = chain.request().newBuilder();
-//        final String jwtToken = sSharedPreferences.getString(X_ACCESS_TOKEN, null);
-//        if (jwtToken != null) {
-//            builder.addHeader("X-ACCESS-TOKEN", jwtToken);
-//        }
-//        return chain.proceed(builder.build());
-//    }
-//}
+public class XAccessTokenInterceptor implements Interceptor {
+
+    @Override
+    @NonNull
+    public Response intercept(@NonNull final Interceptor.Chain chain) throws IOException {
+        final Request.Builder builder = chain.request().newBuilder();
+        final String jwtToken = sSharedPreferences.getString(X_ACCESS_TOKEN, null);
+        if (jwtToken != null) {
+            builder.addHeader("X-ACCESS-TOKEN", jwtToken);
+        }
+        return chain.proceed(builder.build());
+    }
+}

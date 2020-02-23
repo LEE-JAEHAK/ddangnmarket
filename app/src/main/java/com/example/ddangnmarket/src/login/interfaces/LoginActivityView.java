@@ -8,4 +8,8 @@ public interface LoginActivityView {
     void validatePhoneCertSuccess(boolean isSuccess, int code, String message);
 
     void validatePhoneCertFailure();
+
+    void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt);
+
+    void validateJwtFailure();
 }

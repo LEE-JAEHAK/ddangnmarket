@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.login.models;
+package com.example.ddangnmarket.src.nickname.models;
 
 import com.google.gson.annotations.SerializedName;
 

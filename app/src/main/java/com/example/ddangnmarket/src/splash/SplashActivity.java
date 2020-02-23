@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.ddangnmarket.R;
-import com.example.ddangnmarket.src.location.StartActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

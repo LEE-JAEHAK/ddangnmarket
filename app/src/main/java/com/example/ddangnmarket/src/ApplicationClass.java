@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-//import com.example.ddangnmarket.config.XAccessTokenInterceptor;
+import com.example.ddangnmarket.config.XAccessTokenInterceptor;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -52,7 +52,7 @@ public class ApplicationClass extends Application {
             OkHttpClient client = new OkHttpClient.Builder()
                     .readTimeout(5000, TimeUnit.MILLISECONDS)
                     .connectTimeout(5000, TimeUnit.MILLISECONDS)
-                    //.addNetworkInterceptor(new XAccessTokenInterceptor()) // JWT 자동 헤더 전송
+                    .addNetworkInterceptor(new XAccessTokenInterceptor()) // JWT 자동 헤더 전송
                     .build();
 
             retrofit = new Retrofit.Builder()

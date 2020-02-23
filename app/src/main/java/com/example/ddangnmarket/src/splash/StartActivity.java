@@ -1,4 +1,4 @@
-package com.example.ddangnmarket.src.location;
+package com.example.ddangnmarket.src.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ddangnmarket.R;
+import com.example.ddangnmarket.src.location.LocationActivity;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void intentToLocationActivity(){
-        Intent intent = new Intent(StartActivity.this, LocationSettingActivity.class);
+        Intent intent = new Intent(StartActivity.this, LocationActivity.class);
         startActivity(intent);
         finish();
     }
