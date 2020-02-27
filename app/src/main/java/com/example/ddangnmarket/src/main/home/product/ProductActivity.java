@@ -17,6 +17,7 @@ import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.location.LocationAdapter;
 import com.example.ddangnmarket.src.main.home.product.interfaces.ProductActivityView;
+import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
 import com.example.ddangnmarket.src.main.home.product.models.Result;
 
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     ImageButton mBack, mShare, mMore;
     TextView mTvNickname, mTvAddress, mTvManner, mTvtitle, mTvCategories, mTvReroll, mTvText, mTvChat, mTvFavorite, mTvHits, mTvPrice;
     int productNo;
+    ViewPager mViewPager;
+    ViewPagerAdapter mViewPagerAdapter;
+    CircleIndicator mIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +61,18 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
 
         Intent intent = getIntent();
         productNo = intent.getIntExtra("productNo", 1);
-        String picture = intent.getStringExtra("pic");
 
         //여기서 부터 뷰페이저
         mImageList = new ArrayList();
-        mImageList.add(picture);
-        mImageList.add("https://post-phinf.pstatic.net/MjAxODAzMDVfMTEy/MDAxNTIwMjIyODUzNzI4.m13JYsDImfZxkmjJxMGmYe8lKhYxSExyDqdH66C-_i0g.79FPvMvtpW0I0CaqBRn3D7pNyECV2RLxoYEJ3-uiROsg.JPEG/GettyImages-jv11000346.jpg?type=w800_q75");
-        mImageList.add("https://post-phinf.pstatic.net/MjAxNzExMTZfMTQ5/MDAxNTEwNzYyNTM1ODg4.pnYeiJCMETHQSAe0LQLzAsCpHkNPzozKL-7JBiNVtM8g.u30yTLuF5o1plN59Gp1-kAR6D8QU3PsmSjJffVxWk3Ug.JPEG/%EB%B0%94%EB%82%98%EB%82%981.jpg?type=w1200");
-        mImageList.add("https://firebasestorage.googleapis.com/v0/b/ddangnmarket.appspot.com/o/grape.png?alt=media&token=84813ae2-4cb1-4aa6-becf-ee91371813ca");
+        //mImageList.add("https://post-phinf.pstatic.net/MjAxODAzMDVfMTEy/MDAxNTIwMjIyODUzNzI4.m13JYsDImfZxkmjJxMGmYe8lKhYxSExyDqdH66C-_i0g.79FPvMvtpW0I0CaqBRn3D7pNyECV2RLxoYEJ3-uiROsg.JPEG/GettyImages-jv11000346.jpg?type=w800_q75");
+        //mImageList.add("https://post-phinf.pstatic.net/MjAxNzExMTZfMTQ5/MDAxNTEwNzYyNTM1ODg4.pnYeiJCMETHQSAe0LQLzAsCpHkNPzozKL-7JBiNVtM8g.u30yTLuF5o1plN59Gp1-kAR6D8QU3PsmSjJffVxWk3Ug.JPEG/%EB%B0%94%EB%82%98%EB%82%981.jpg?type=w1200");
+        //mImageList.add("https://firebasestorage.googleapis.com/v0/b/ddangnmarket.appspot.com/o/grape.png?alt=media&token=84813ae2-4cb1-4aa6-becf-ee91371813ca");
 
-        ViewPager viewPager = findViewById(R.id.product_information_viewPager);
-        viewPager.setAdapter(new ViewPagerAdapter(this, mImageList));
+        mViewPager = findViewById(R.id.product_information_viewPager);
+        mViewPagerAdapter = new ViewPagerAdapter(this,mImageList);
+        mViewPager.setAdapter(mViewPagerAdapter);
 
+        //상단바
         mBack.setImageResource(R.drawable.home_as_up);
         mBack.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
         mShare.setImageResource(R.drawable.ic_share_outline_24);
@@ -76,8 +80,9 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
         mMore.setImageResource(R.drawable.icon_ads_more);
         mMore.setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_IN);
 
-        CircleIndicator indicator = findViewById(R.id.product_information_indicator);
-        indicator.setViewPager(viewPager);
+        //인디케이터
+        mIndicator = findViewById(R.id.product_information_indicator);
+
 
         getProduct(productNo);
     }
@@ -106,6 +111,8 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     public void getProduct(int productNo) {
         final ProductService productService = new ProductService(this);
         productService.getProduct(productNo);
+
+        productService.getProductImage(productNo);
     }
 
     @Override
@@ -132,6 +139,23 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
 
     @Override
     public void validateProductFailure(String message) {
+        showCustomToast(message);
+    }
+
+    @Override
+    public void validateProductImageSuccess(boolean isSuccess, int code, String message, ArrayList<ProductImageResponse.Result> resultArrayList) {
+        showCustomToast(message);
+
+        mImageList.clear();
+        for (int i = 0; i < resultArrayList.size(); i++) {
+            mImageList.add(resultArrayList.get(i).getImageUrl());
+        }
+        mViewPagerAdapter.notifyDataSetChanged();
+        mIndicator.setViewPager(mViewPager);
+    }
+
+    @Override
+    public void validateProductImageFailure(String message) {
         showCustomToast(message);
     }
 }

@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
             android:onClick="fragmentOnClick"
             android:orientation="vertical">
 
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="fragmentOnClick"
+            android:background="@drawable/ripple_effect"
             android:orientation="vertical">
 
             <ImageView
@@ -78,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="fragmentOnClick"
+            android:background="@drawable/ripple_effect"
             android:orientation="vertical">
 
             <ImageView
@@ -104,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="fragmentOnClick"
+            android:background="@drawable/ripple_effect"
             android:orientation="vertical">
 
             <ImageView
@@ -130,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="fragmentOnClick"
+            android:background="@drawable/ripple_effect"
             android:orientation="vertical">
 
             <ImageView

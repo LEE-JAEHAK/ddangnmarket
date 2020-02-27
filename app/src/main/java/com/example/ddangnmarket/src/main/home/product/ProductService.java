@@ -2,6 +2,7 @@ package com.example.ddangnmarket.src.main.home.product;
 
 import com.example.ddangnmarket.src.main.home.product.interfaces.ProductActivityView;
 import com.example.ddangnmarket.src.main.home.product.interfaces.ProductRetrofitInterface;
+import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductResponse;
 
 import retrofit2.Call;
@@ -17,18 +18,34 @@ public class ProductService {
         this.productActivityView = productActivityView;
     }
 
-    void getProduct(int productNo){
+    void getProduct(int productNo) {
         final ProductRetrofitInterface productRetrofitInterface = getRetrofit().create(ProductRetrofitInterface.class);
-        productRetrofitInterface.getProductQuery(productNo).enqueue(new Callback<ProductResponse>() {
+        productRetrofitInterface.getProductPath(productNo).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 final ProductResponse productResponse = response.body();
-                productActivityView.validateProductSuccess(productResponse.getIsSuccess(),productResponse.getCode(),productResponse.getMessage(),productResponse.getResult());
+                productActivityView.validateProductSuccess(productResponse.getIsSuccess(), productResponse.getCode(), productResponse.getMessage(), productResponse.getResult());
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                    productActivityView.validateProductFailure(t.getMessage());
+                productActivityView.validateProductFailure(t.getMessage());
+            }
+        });
+    }
+
+    void getProductImage(int productNo) {
+        final ProductRetrofitInterface productRetrofitInterface = getRetrofit().create(ProductRetrofitInterface.class);
+        productRetrofitInterface.getProductImagePath(productNo).enqueue(new Callback<ProductImageResponse>() {
+            @Override
+            public void onResponse(Call<ProductImageResponse> call, Response<ProductImageResponse> response) {
+                final ProductImageResponse productImageResponse = response.body();
+                productActivityView.validateProductImageSuccess(productImageResponse.getIsSuccess(), productImageResponse.getCode(), productImageResponse.getMessage(), productImageResponse.getResult());
+            }
+
+            @Override
+            public void onFailure(Call<ProductImageResponse> call, Throwable t) {
+                productActivityView.validateProductFailure(t.getMessage());
             }
         });
     }

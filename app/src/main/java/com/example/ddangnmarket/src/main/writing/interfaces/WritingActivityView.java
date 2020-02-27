@@ -8,4 +8,8 @@ public interface WritingActivityView {
 
         void validateProductFailure(String message);
 
+        void validateProductImageSuccess(boolean isSuccess, int code, String message, int index);
+
+        void validateProductImageFailure(String message);
+
 }
