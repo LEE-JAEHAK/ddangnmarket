@@ -3,6 +3,8 @@
     package="com.example.ddangnmarket">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +13,11 @@
         android:roundIcon="@mipmap/ic_symbol_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.nickname.NicknameActivity"></activity>
+        <activity android:name=".src.main.writing.WritingActivity"></activity>
+        <activity android:name=".src.main.profile.SettingActivity" />
+        <activity android:name=".src.nickname.NicknameActivity" />
         <activity android:name=".src.login.LoginActivity" />
-        <activity android:name=".src.main.home.product.ProductInformation" />
+        <activity android:name=".src.main.home.product.ProductActivity" />
         <activity android:name=".src.location.LocationActivity" />
         <activity android:name=".src.splash.StartActivity" />
         <activity android:name=".src.splash.SplashActivity">

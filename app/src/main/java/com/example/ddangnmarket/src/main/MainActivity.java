@@ -3,24 +3,25 @@ package com.example.ddangnmarket.src.main;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.ddangnmarket.R;
+import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.main.category.CategoryFragment;
 import com.example.ddangnmarket.src.main.chat.ChatFragment;
 import com.example.ddangnmarket.src.main.home.HomeFragment;
 import com.example.ddangnmarket.src.main.profile.ProfileFragment;
 import com.example.ddangnmarket.src.main.writing.WritingFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     HomeFragment mHomeFragment;
     CategoryFragment mCategoryFragment;
     WritingFragment mWritingFragment;
     ChatFragment mChatFragment;
     ProfileFragment mProfileFragment;
-    String flag, nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
         mWritingFragment = new WritingFragment();
         mChatFragment = new ChatFragment();
         mProfileFragment = new ProfileFragment();
-
-        Intent intent = getIntent();
-        flag = intent.getStringExtra("flag");
-        nickname = intent.getStringExtra("nickname");
 
         moveHome();
     }
@@ -57,10 +54,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveProfile() {
-        Bundle bundle = new Bundle();
-        bundle.putString("flag", flag);
-        bundle.putString("nickname",nickname);
-        mProfileFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, mProfileFragment).commit();
     }
 

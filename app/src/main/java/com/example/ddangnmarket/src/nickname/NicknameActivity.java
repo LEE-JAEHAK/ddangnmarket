@@ -17,16 +17,23 @@ import com.example.ddangnmarket.src.nickname.interfaces.NicknameActivityView;
 import com.example.ddangnmarket.src.nickname.models.RequestNickname;
 import com.example.ddangnmarket.src.main.MainActivity;
 
+import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
+
 public class NicknameActivity extends BaseActivity implements NicknameActivityView {
     TextView mTvPhoneNumber;
-    EditText mEtNickname, mEtLocationNo;
+    EditText mEtNickname;
     Button mBtnStart;
     String mPhoneNumber;
+    int mLocationNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nickname);
+
+        //SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN",MODE_PRIVATE);
+        mLocationNo = sSharedPreferences.getInt("locationNo",1);
+        System.out.println("회원가입 로케이션넘버 : " + mLocationNo);
 
         Intent intent = getIntent();
         mPhoneNumber = intent.getStringExtra("phoneNumber");
@@ -34,7 +41,6 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
         mTvPhoneNumber = findViewById(R.id.nickname_tv_phone_number);
         mTvPhoneNumber.setText(mPhoneNumber);
         mEtNickname = findViewById(R.id.nickname_et_nickname);
-        mEtLocationNo = findViewById(R.id.nickname_et_location);
         mBtnStart = findViewById(R.id.nickname_btn_start);
     }
 
@@ -53,7 +59,7 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
         RequestNickname requestNickname = new RequestNickname();
         requestNickname.setPhoneNum(mPhoneNumber);
         requestNickname.setId(mEtNickname.getText().toString());
-        requestNickname.setLocation(Integer.parseInt(mEtLocationNo.getText().toString()));
+        requestNickname.setLocation(mLocationNo);
         nicknameService.postNickname(requestNickname);
     }
 
@@ -69,11 +75,6 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
         if (isSuccess && code == 100) {
             showCustomToast(message);
             getJwt();
-//            Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
-//            intent.putExtra("flag","login");
-//            intent.putExtra("nickname",mEtNickname.getText().toString());
-//            startActivity(intent);
-//            finish();
         } else {
             showCustomToast(message);
         }
@@ -91,14 +92,16 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
             if (code == 100) {
                 showCustomToast(message);
 
-                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("X-ACCESS_TOKEN", jwt);
+                //SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sSharedPreferences.edit();
+                editor.putString("X-ACCESS-TOKEN", jwt);
+                editor.putString("nickname", mEtNickname.getText().toString());
                 editor.commit();
 
+                System.out.println("jwt 넣기 " + jwt);
+                System.out.println("nickname : " + mEtNickname.getText().toString());
+
                 Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
-                intent.putExtra("flag", "login");
-                intent.putExtra("nickname", mEtNickname.getText().toString());
                 startActivity(intent);
                 finish();
             } else if (code == 200) {

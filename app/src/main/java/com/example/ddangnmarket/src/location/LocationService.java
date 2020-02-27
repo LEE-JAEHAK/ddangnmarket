@@ -24,7 +24,7 @@ public class LocationService {
             public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {
                 final LocationResponse locationResponse = response.body();
                 if (locationResponse == null) {
-                    mLocationActivityView.validateLocationFailure();
+                    mLocationActivityView.validateLocationFailure(response.message());
                     return;
                 }
 
@@ -33,7 +33,7 @@ public class LocationService {
 
             @Override
             public void onFailure(Call<LocationResponse> call, Throwable t) {
-                mLocationActivityView.validateLocationFailure();
+                mLocationActivityView.validateLocationFailure(t.getMessage());
             }
         });
     }

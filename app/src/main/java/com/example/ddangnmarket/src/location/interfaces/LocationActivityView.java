@@ -8,6 +8,6 @@ public interface LocationActivityView {
 
     void validateLocationSuccess(boolean isSuccess, int code, String message, ArrayList<Result> results);
 
-    void validateLocationFailure();
+    void validateLocationFailure(String message);
 
 }

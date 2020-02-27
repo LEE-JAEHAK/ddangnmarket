@@ -10,22 +10,19 @@
     <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
 
 
+    <!--&lt;!&ndash;    ////&ndash;&gt;-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
 
-
-<!--&lt;!&ndash;    ////&ndash;&gt;-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--&lt;!&ndash;&ndash;&gt;-->
-
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--    <string name="start_activity_loading">로딩중입니다.</string>-->
-<!--&lt;!&ndash;&ndash;&gt;-->
-
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--    <string name="start_activity_loading">로딩중입니다.</string>-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
 
 
 </resources>

@@ -72,7 +72,7 @@ public class LoginService {
                     mLoginActivityView.validateJwtFailure();
                     return;
                 }
-                System.out.println("썩쎄스");
+                System.out.println("LoginService 썩쎄스");
                 mLoginActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult().getJwt());
             }
 

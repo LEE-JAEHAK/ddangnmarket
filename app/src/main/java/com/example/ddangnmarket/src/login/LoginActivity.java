@@ -17,6 +17,9 @@ import com.example.ddangnmarket.src.login.models.RequestPhoneCert;
 import com.example.ddangnmarket.src.main.MainActivity;
 import com.example.ddangnmarket.src.nickname.NicknameActivity;
 
+import static com.example.ddangnmarket.src.ApplicationClass.X_ACCESS_TOKEN;
+import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
+
 public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     EditText mEtPhoneNumber, mEtPutCert;
@@ -99,8 +102,9 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
             if (code == 100) {
                 getJwt();
             } else if (code == 101) {
-                Intent intent = new Intent(LoginActivity.this, NicknameActivity.class);
                 showCustomToast(message);
+
+                Intent intent = new Intent(LoginActivity.this, NicknameActivity.class);
                 intent.putExtra("phoneNumber", phoneNumber);
                 startActivity(intent);
                 finish();
@@ -122,13 +126,20 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
             if (code == 100) {
                 showCustomToast(message);
 
-                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("X-ACCESS_TOKEN",jwt);
+//                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
+
+//                sSharedPreferences;
+                SharedPreferences.Editor editor = sSharedPreferences.edit();
+                editor.putString(X_ACCESS_TOKEN,jwt);
+                System.out.println("jwt 넣기 : " + jwt);
                 editor.commit();
 
+                final String jwtToken = sSharedPreferences.getString(X_ACCESS_TOKEN, null);
+                System.out.println("Interceptor : " + jwtToken);
+
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("flag", "login");
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             } else if (code == 200) {

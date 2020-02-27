@@ -18,8 +18,11 @@ public class XAccessTokenInterceptor implements Interceptor {
     public Response intercept(@NonNull final Interceptor.Chain chain) throws IOException {
         final Request.Builder builder = chain.request().newBuilder();
         final String jwtToken = sSharedPreferences.getString(X_ACCESS_TOKEN, null);
+        System.out.println("Interceptor : " + jwtToken);
+
         if (jwtToken != null) {
             builder.addHeader("X-ACCESS-TOKEN", jwtToken);
+            System.out.println("Interceptor : " + jwtToken);
         }
         return chain.proceed(builder.build());
     }

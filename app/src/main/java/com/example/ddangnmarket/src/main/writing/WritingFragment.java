@@ -1,6 +1,7 @@
 package com.example.ddangnmarket.src.main.writing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,8 @@ public class WritingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_writing, container, false);
+        Intent intent = new Intent(activity, WritingActivity.class);
+        startActivity(intent);
         return view;
     }
 }
