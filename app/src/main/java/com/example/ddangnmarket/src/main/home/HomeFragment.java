@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment implements ItemActivityView {
     public void validateItemSuccess(boolean isSuccess, int code, String message, ArrayList<ResultProduct> resultProducts) {
         if (isSuccess) {
             if (code == 100) {
-                activity.showCustomToast(message);
+                //activity.showCustomToast(message);
 
                 mResultProducts.clear();
                 mResultProducts.addAll(resultProducts);

@@ -84,6 +84,7 @@
                     android:src="@drawable/ic_camera_filled_24" />
 
                 <TextView
+                    android:id="@+id/writing_tv_number_of_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -91,26 +92,14 @@
             </LinearLayout>
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/writing_iv_pic1"
-            android:layout_width="70dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/writing_rv"
+            android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"/>
+            android:scrollbars="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
-        <ImageView
-            android:id="@+id/writing_iv_pic2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY" />
-
-        <ImageView
-            android:id="@+id/writing_iv_pic3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY" />
     </LinearLayout>
 
     <View
@@ -122,7 +111,8 @@
         android:id="@+id/writing_et_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:inputType="text"
         android:background="@android:color/transparent"
         android:hint="제목"
         android:textSize="15sp" />
@@ -140,6 +130,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/writing_tv_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -148,8 +139,10 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/writing_tv_categoryNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:layout_weight="1" />
 
         <ImageView
@@ -169,7 +162,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="horizontal">
 
         <TextView
@@ -184,6 +178,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:hint="가격(선택사항)"
+            android:padding="20dp"
             android:inputType="number"
             android:textSize="15sp" />
     </LinearLayout>
@@ -198,12 +193,12 @@
         android:id="@+id/writing_et_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:padding="20dp"
         android:background="@android:color/transparent"
         android:hint="올릴 게시글 내용을 작성해주세요. 가품 및 판매금지품목은 게시가 제한될 수 있어요."
         android:textSize="15sp" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

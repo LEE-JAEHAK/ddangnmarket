@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mEtPhoneNumber = findViewById(R.id.login_et_phone_number);
         mEtPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());

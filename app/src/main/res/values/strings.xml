@@ -8,6 +8,8 @@
     <string name="location">청라1동</string>
     <string name="loading">로딩중입니다.</string>
     <string name="network_error">네트워크 연결이 원활하지 않습니다.</string>
+    <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
+    <string name="permission_2">사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.</string>
 
 
     <!--&lt;!&ndash;    ////&ndash;&gt;-->

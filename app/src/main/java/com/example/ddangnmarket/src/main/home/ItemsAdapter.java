@@ -17,6 +17,8 @@ import com.example.ddangnmarket.src.main.home.product.ProductActivity;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static com.example.ddangnmarket.src.main.home.product.GridViewAdapter.rerollConverter;
+
 public class ItemsAdapter extends BaseAdapter {
     private ArrayList<ResultProduct> mItemsList;
     private LayoutInflater mInflater;
@@ -29,7 +31,9 @@ public class ItemsAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {  return mItemsList.size();  }
+    public int getCount() {
+        return mItemsList.size();
+    }
 
     @Override
     public Object getItem(int position) {
@@ -62,9 +66,10 @@ public class ItemsAdapter extends BaseAdapter {
         image.setScaleType(ImageView.ScaleType.FIT_XY);
         name.setText(items.getTitle());
         address.setText(dong);
-        reroll.setText(" · "+items.getReroll()+"분전");
-        reply.setText(items.getComments()+"");
-        interest.setText(items.getFavorite()+"");
+        String tmp1 = rerollConverter(items.getReroll());
+        reroll.setText(" · " + tmp1);
+        reply.setText(items.getComments() + "");
+        interest.setText(items.getFavorite() + "");
 
         String tmp = moneyFormatToWon(items.getPrice());
         price.setText(tmp + "원");
@@ -73,7 +78,7 @@ public class ItemsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ProductActivity.class);
-                intent.putExtra("productNo",items.getProductNo());
+                intent.putExtra("productNo", items.getProductNo());
                 mContext.startActivity(intent);
             }
         });

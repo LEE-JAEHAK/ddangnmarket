@@ -1,5 +1,6 @@
 package com.example.ddangnmarket.src.main.home.product.interfaces;
 
+import com.example.ddangnmarket.src.main.home.product.models.ProductAnotherResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
 import com.example.ddangnmarket.src.main.home.product.models.Result;
 
@@ -14,4 +15,8 @@ public interface ProductActivityView {
     void validateProductImageSuccess(boolean isSuccess, int code, String message, ArrayList<ProductImageResponse.Result> resultArrayList);
 
     void validateProductImageFailure(String message);
+
+    void validateProductAnotherSuccess(boolean isSuccess, int code, String message, ArrayList<ProductAnotherResponse.Result> resultArrayList);
+
+    void validateProductAnotherFailure(String message);
 }

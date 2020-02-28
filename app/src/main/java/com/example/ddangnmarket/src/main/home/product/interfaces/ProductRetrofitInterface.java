@@ -1,5 +1,6 @@
 package com.example.ddangnmarket.src.main.home.product.interfaces;
 
+import com.example.ddangnmarket.src.main.home.product.models.ProductAnotherResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductResponse;
 
@@ -17,5 +18,10 @@ public interface ProductRetrofitInterface {
     @GET("/product/{productNo}/image")
     Call<ProductImageResponse> getProductImagePath(
             @Path("productNo") int productNo
+    );
+
+    @GET("/user/{userNo}/product")
+    Call<ProductAnotherResponse> getProductAnotherPath(
+            @Path("userNo") final int userNo
     );
 }

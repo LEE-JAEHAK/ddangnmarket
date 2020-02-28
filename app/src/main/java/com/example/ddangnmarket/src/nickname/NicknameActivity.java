@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,8 +31,8 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nickname);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        //SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN",MODE_PRIVATE);
         mLocationNo = sSharedPreferences.getInt("locationNo",1);
         System.out.println("회원가입 로케이션넘버 : " + mLocationNo);
 

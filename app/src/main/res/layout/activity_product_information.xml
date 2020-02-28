@@ -9,6 +9,7 @@
     tools:context=".src.main.home.product.ProductActivity">
 
     <ScrollView
+        android:id="@+id/product_information_scrollview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1">
@@ -108,8 +109,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="판매자 닉네임"
-                        android:textSize="15sp"
                         android:textColor="@android:color/black"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -122,8 +123,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="address"
-                            android:textSize="13sp"
-                            android:textColor="@android:color/black" />
+                            android:textColor="@android:color/black"
+                            android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -153,11 +154,11 @@
                                 android:id="@+id/product_information_tv_manner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/blue"
-                                android:textStyle="bold"
-                                android:textSize="17sp"
                                 android:layout_marginEnd="5dp"
-                                android:text="36.5°C" />
+                                android:text="36.5°C"
+                                android:textColor="@color/blue"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
 
@@ -174,8 +175,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_marginTop="4dp"
-                        android:textSize="13sp"
-                        android:text="매너온도" />
+                        android:text="매너온도"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -210,15 +211,15 @@
                         android:id="@+id/product_information_tv_categories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="categories" />
+                        android:text="categories"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/product_information_tv_reroll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="12sp"
-                        android:text=" reroll" />
+                        android:text=" reroll"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <TextView
@@ -241,22 +242,22 @@
                         android:id="@+id/product_information_tv_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="채팅 0개" />
+                        android:text="채팅 0개"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/product_information_tv_favorite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text=" 관심 1" />
+                        android:text=" 관심 1"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/product_information_tv_hits"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text=" 조회 55" />
+                        android:text=" 조회 55"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -323,6 +324,48 @@
                     android:text="댓글쓰기"
                     android:textColor="@android:color/black" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/colorGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/product_information_tv_nickname_another"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jerrry님의 판매 상품"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="모두보기" />
+            </LinearLayout>
+
+            <GridView
+                android:id="@+id/product_information_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:gravity="center"
+                android:numColumns="2">
+            </GridView>
         </LinearLayout>
     </ScrollView>
 

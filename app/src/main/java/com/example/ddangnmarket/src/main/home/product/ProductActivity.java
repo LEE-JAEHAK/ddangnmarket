@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +21,7 @@ import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.location.LocationAdapter;
 import com.example.ddangnmarket.src.main.home.product.interfaces.ProductActivityView;
+import com.example.ddangnmarket.src.main.home.product.models.ProductAnotherResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
 import com.example.ddangnmarket.src.main.home.product.models.Result;
 
@@ -25,17 +30,20 @@ import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator;
 
 import static com.example.ddangnmarket.src.main.home.ItemsAdapter.moneyFormatToWon;
+import static com.example.ddangnmarket.src.main.home.product.GridViewAdapter.rerollConverter;
 
 public class ProductActivity extends BaseActivity implements ProductActivityView {
 
     private ArrayList<String> mImageList;
     ImageView mImageView;
     ImageButton mBack, mShare, mMore;
-    TextView mTvNickname, mTvAddress, mTvManner, mTvtitle, mTvCategories, mTvReroll, mTvText, mTvChat, mTvFavorite, mTvHits, mTvPrice;
+    TextView mTvNickname, mTvAddress, mTvManner, mTvtitle, mTvCategories, mTvReroll, mTvText, mTvChat, mTvFavorite, mTvHits, mTvPrice, mTvNicknameAnother;
     int productNo;
     ViewPager mViewPager;
     ViewPagerAdapter mViewPagerAdapter;
     CircleIndicator mIndicator;
+    GridView mGridView;
+    ScrollView mScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,10 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
         mTvFavorite = findViewById(R.id.product_information_tv_favorite);
         mTvHits = findViewById(R.id.product_information_tv_hits);
         mTvPrice = findViewById(R.id.product_information_tv_price);
+        mGridView = findViewById(R.id.product_information_gridview);
+        mTvNicknameAnother = findViewById(R.id.product_information_tv_nickname_another);
+        mScrollView = findViewById(R.id.product_information_scrollview);
+
 
         mBack = findViewById(R.id.product_information_iv_back);
         mShare = findViewById(R.id.product_information_iv_share);
@@ -62,14 +74,12 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
         Intent intent = getIntent();
         productNo = intent.getIntExtra("productNo", 1);
 
+
         //여기서 부터 뷰페이저
         mImageList = new ArrayList();
-        //mImageList.add("https://post-phinf.pstatic.net/MjAxODAzMDVfMTEy/MDAxNTIwMjIyODUzNzI4.m13JYsDImfZxkmjJxMGmYe8lKhYxSExyDqdH66C-_i0g.79FPvMvtpW0I0CaqBRn3D7pNyECV2RLxoYEJ3-uiROsg.JPEG/GettyImages-jv11000346.jpg?type=w800_q75");
-        //mImageList.add("https://post-phinf.pstatic.net/MjAxNzExMTZfMTQ5/MDAxNTEwNzYyNTM1ODg4.pnYeiJCMETHQSAe0LQLzAsCpHkNPzozKL-7JBiNVtM8g.u30yTLuF5o1plN59Gp1-kAR6D8QU3PsmSjJffVxWk3Ug.JPEG/%EB%B0%94%EB%82%98%EB%82%981.jpg?type=w1200");
-        //mImageList.add("https://firebasestorage.googleapis.com/v0/b/ddangnmarket.appspot.com/o/grape.png?alt=media&token=84813ae2-4cb1-4aa6-becf-ee91371813ca");
 
         mViewPager = findViewById(R.id.product_information_viewPager);
-        mViewPagerAdapter = new ViewPagerAdapter(this,mImageList);
+        mViewPagerAdapter = new ViewPagerAdapter(this, mImageList);
         mViewPager.setAdapter(mViewPagerAdapter);
 
         //상단바
@@ -85,6 +95,16 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
 
 
         getProduct(productNo);
+
+        //스크롤
+
+//        mGridView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                mScrollView.requestDisallowInterceptTouchEvent(true);
+//                return false;
+//            }
+//        });
     }
 
     public void productInformationOnClick(View view) {
@@ -111,7 +131,6 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     public void getProduct(int productNo) {
         final ProductService productService = new ProductService(this);
         productService.getProduct(productNo);
-
         productService.getProductImage(productNo);
     }
 
@@ -119,20 +138,25 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     public void validateProductSuccess(boolean isSuccess, int code, String message, Result result) {
         if (isSuccess) {
             if (code == 100) {
-                showCustomToast(message);
+                //showCustomToast(message);
 
                 mTvNickname.setText(result.getId());
                 mTvAddress.setText(result.getAddress());
                 mTvManner.setText(result.getManner() + "°C");
                 mTvtitle.setText(result.getTitle());
                 mTvCategories.setText(result.getCategories());
-                mTvReroll.setText(" · 끌올 " + result.getReroll() + "분 전");
+                String tmp = rerollConverter(result.getReroll());
+                mTvReroll.setText(" · " + tmp);
                 mTvText.setText(result.getText());
                 mTvChat.setText("채팅 " + result.getChat() + "개");
                 mTvFavorite.setText(" · 관심 " + result.getFavorite() + "개");
                 mTvHits.setText(" · 조회 " + result.getHits() + "");
                 String mPrice = moneyFormatToWon(result.getPrice());
                 mTvPrice.setText(mPrice + "원");
+                mTvNicknameAnother.setText(result.getId() + "님의 판매 상품");
+
+                final ProductService productService = new ProductService(this);
+                productService.getProductAnother(result.getUserNo());
             } else showCustomToast(message);
         }
     }
@@ -144,7 +168,7 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
 
     @Override
     public void validateProductImageSuccess(boolean isSuccess, int code, String message, ArrayList<ProductImageResponse.Result> resultArrayList) {
-        showCustomToast(message);
+        //showCustomToast(message);
 
         mImageList.clear();
         for (int i = 0; i < resultArrayList.size(); i++) {
@@ -156,6 +180,28 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
 
     @Override
     public void validateProductImageFailure(String message) {
+        showCustomToast(message);
+    }
+
+    @Override
+    public void validateProductAnotherSuccess(boolean isSuccess, int code, String message, ArrayList<ProductAnotherResponse.Result> resultArrayList) {
+
+
+        //그리드뷰
+        GridViewAdapter gridViewAdapter = new GridViewAdapter(resultArrayList, this);
+        mGridView.setAdapter(gridViewAdapter);
+
+        mScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.scrollTo(0, 0);
+            }
+        });
+
+    }
+
+    @Override
+    public void validateProductAnotherFailure(String message) {
         showCustomToast(message);
     }
 }

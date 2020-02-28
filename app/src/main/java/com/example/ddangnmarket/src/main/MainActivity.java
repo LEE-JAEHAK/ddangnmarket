@@ -1,27 +1,35 @@
 package com.example.ddangnmarket.src.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
+import com.example.ddangnmarket.src.login.LoginActivity;
 import com.example.ddangnmarket.src.main.category.CategoryFragment;
 import com.example.ddangnmarket.src.main.chat.ChatFragment;
 import com.example.ddangnmarket.src.main.home.HomeFragment;
 import com.example.ddangnmarket.src.main.profile.ProfileFragment;
-import com.example.ddangnmarket.src.main.writing.WritingFragment;
+import com.example.ddangnmarket.src.main.profile.SettingActivity;
+import com.example.ddangnmarket.src.main.writing.WritingActivity;
+import com.example.ddangnmarket.src.splash.StartActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import static com.example.ddangnmarket.src.ApplicationClass.X_ACCESS_TOKEN;
+import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
 
 public class MainActivity extends BaseActivity {
 
     HomeFragment mHomeFragment;
     CategoryFragment mCategoryFragment;
-    WritingFragment mWritingFragment;
     ChatFragment mChatFragment;
     ProfileFragment mProfileFragment;
+    BottomSheetDialog mBottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +38,6 @@ public class MainActivity extends BaseActivity {
 
         mHomeFragment = new HomeFragment();
         mCategoryFragment = new CategoryFragment();
-        mWritingFragment = new WritingFragment();
         mChatFragment = new ChatFragment();
         mProfileFragment = new ProfileFragment();
 
@@ -46,11 +53,73 @@ public class MainActivity extends BaseActivity {
     }
 
     public void moveWriting() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mWritingFragment).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container, mWritingFragment).commit();
+
+        if (sSharedPreferences.getString("X-ACCESS-TOKEN", "").equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("회원가입 또는 로그인후 이용할 수 있습니다.");
+            builder.setPositiveButton("로그인/가입", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+            builder.show();
+        } else {
+            mBottomSheetDialog = new BottomSheetDialog(MainActivity.this);
+            mBottomSheetDialog.setContentView(R.layout.bottom_sheet);
+            LinearLayout btnSale = mBottomSheetDialog.findViewById(R.id.bottom_sheet_sale);
+            LinearLayout btnAd = mBottomSheetDialog.findViewById(R.id.bottom_sheet_ad);
+            btnSale.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, WritingActivity.class);
+                    startActivity(intent);
+                    mBottomSheetDialog.dismiss();
+                }
+            });
+            btnAd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mBottomSheetDialog.dismiss();
+                }
+            });
+            mBottomSheetDialog.show();
+        }
+
     }
 
     public void moveChat() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mChatFragment).commit();
+        if (sSharedPreferences.getString("X-ACCESS-TOKEN", "").equals("")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("회원가입 또는 로그인후 이용할 수 있습니다.");
+            builder.setPositiveButton("로그인/가입", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+            builder.show();
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, mChatFragment).commit();
+        }
+
     }
 
     public void moveProfile() {
