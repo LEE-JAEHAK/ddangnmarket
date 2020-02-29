@@ -43,17 +43,14 @@ public class NicknameService {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 final LoginResponse loginResponse = response.body();
                 if (loginResponse == null) {
-                    System.out.println("리스폰스가 눌값");
                     mNicknameActivityView.validateJwtFailure();
                     return;
                 }
-                System.out.println("썩쎄스");
-                mNicknameActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult().getJwt());
+                mNicknameActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult());
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                System.out.println("온페일리어");
                 mNicknameActivityView.validateJwtFailure();
             }
         });

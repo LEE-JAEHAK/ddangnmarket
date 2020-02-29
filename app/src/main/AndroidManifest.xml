@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name=".src.LocationCertification.LocationCertificationActivity"></activity>
+        <activity android:name=".src.Profile.Profile"></activity>
+        <activity android:name=".src.main.chat.ChatActivity" />
+        <activity android:name=".src.LocationCertification.LocationCertificationActivity" />
         <activity android:name=".src.main.profile.ProfileActivity" />
         <activity android:name=".src.main.writing.WritingActivity" />
         <activity android:name=".src.main.profile.SettingActivity" />

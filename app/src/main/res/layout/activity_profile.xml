@@ -69,6 +69,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/profile_iv_url"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_user_profile_placeholder" />
@@ -207,13 +208,29 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="청라1동 1회 인증"
-            android:textColor="@android:color/black" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/profile_tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="청라1동"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/profile_tv_cert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="1회 인증"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
 
         <TextView
+            android:id="@+id/profile_tv_createdAt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"

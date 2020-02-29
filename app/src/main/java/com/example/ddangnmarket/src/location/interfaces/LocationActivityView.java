@@ -10,4 +10,7 @@ public interface LocationActivityView {
 
     void validateLocationFailure(String message);
 
+    void validateLocationChangeSuccess(boolean isSuccess, int code, String message);
+
+    void validateLocationChangeFailure(String message);
 }

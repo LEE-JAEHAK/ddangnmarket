@@ -27,7 +27,7 @@ import com.example.ddangnmarket.src.login.models.RequestMessage;
 public class LocationCertificationActivity extends BaseActivity implements LocationActivityView {
     Button mBtnCert, mBtnSubmit;
     TextView mTvGetLocation;
-    double x,y;
+    double x, y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +65,11 @@ public class LocationCertificationActivity extends BaseActivity implements Locat
             }
         });
     }
-    public void CertLocation(){
+
+    public void CertLocation() {
         LocationService locationService = new LocationService(this);
         RequestLocation requestLocation = new RequestLocation();
-        System.out.println(x +""+y);
+        System.out.println(x + "" + y);
         requestLocation.setX_axis(x);
         requestLocation.setY_axis(y);
         locationService.postLocation(requestLocation);
@@ -83,8 +84,8 @@ public class LocationCertificationActivity extends BaseActivity implements Locat
             double altitude = location.getAltitude();
 
             mTvGetLocation.setText("위도 : " + latitude + ", 경도 : " + longitude);
-            x=latitude;
-            y=longitude;
+            x = latitude;
+            y = longitude;
             System.out.println("위치정보 : " + provider + "\n" +
                     "위도 : " + longitude + "\n" +
                     "경도 : " + latitude + "\n" +

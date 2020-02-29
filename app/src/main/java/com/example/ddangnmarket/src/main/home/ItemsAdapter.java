@@ -17,12 +17,14 @@ import com.example.ddangnmarket.src.main.home.product.ProductActivity;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
 import static com.example.ddangnmarket.src.main.home.product.GridViewAdapter.rerollConverter;
 
 public class ItemsAdapter extends BaseAdapter {
     private ArrayList<ResultProduct> mItemsList;
     private LayoutInflater mInflater;
     private Context mContext;
+    HomeFragment homeFragment;
 
     public ItemsAdapter(ArrayList<ResultProduct> mItemsList, Context mContext) {
         this.mItemsList = mItemsList;

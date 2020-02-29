@@ -22,12 +22,15 @@ import androidx.core.content.ContextCompat;
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.location.interfaces.LocationActivityView;
+import com.example.ddangnmarket.src.location.models.RequestLocation;
 import com.example.ddangnmarket.src.location.models.Result;
 import com.example.ddangnmarket.src.login.LoginActivity;
 import com.example.ddangnmarket.src.main.MainActivity;
 import com.example.ddangnmarket.src.nickname.NicknameActivity;
 
 import java.util.ArrayList;
+
+import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
 
 public class LocationActivity extends BaseActivity implements LocationActivityView {
 
@@ -87,6 +90,13 @@ public class LocationActivity extends BaseActivity implements LocationActivityVi
         locationService.getLocation(location);
     }
 
+    public void locationChange(int locationNo) {
+        LocationService locationService = new LocationService(this);
+        RequestLocation requestLocation = new RequestLocation();
+        requestLocation.setLocationNo(locationNo);
+        locationService.postLocation(requestLocation);
+    }
+
     @Override
     public void validateLocationSuccess(boolean isSuccess, int code, String message, ArrayList<Result> results) {
         hideProgressDialog();
@@ -107,6 +117,16 @@ public class LocationActivity extends BaseActivity implements LocationActivityVi
 
     @Override
     public void validateLocationFailure(String message) {
+        showCustomToast(message);
+    }
+
+    @Override
+    public void validateLocationChangeSuccess(boolean isSuccess, int code, String message) {
+        showCustomToast(message);
+    }
+
+    @Override
+    public void validateLocationChangeFailure(String message) {
         showCustomToast(message);
     }
 

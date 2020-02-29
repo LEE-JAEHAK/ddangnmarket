@@ -16,9 +16,11 @@ import com.example.ddangnmarket.src.main.MainActivity;
 
 import java.util.ArrayList;
 
+import static com.example.ddangnmarket.src.ApplicationClass.X_ACCESS_TOKEN;
 import static com.example.ddangnmarket.src.ApplicationClass.sSharedPreferences;
 
 public class LocationAdapter extends BaseAdapter {
+    LocationActivity locationActivity;
     private ArrayList<Result> mLocationList;
     private LayoutInflater mInflater;
     private Context mContext;
@@ -69,7 +71,8 @@ public class LocationAdapter extends BaseAdapter {
                 editor.putString("dong", dong);
                 editor.commit();
                 System.out.println("locationAdapter locationNo : " + mLocationNo + " , dong : " + dong);
-
+                if(sSharedPreferences.getString(X_ACCESS_TOKEN,"").equals("")){}
+                else{locationActivity.locationChange(mLocationNo);}
                 Intent intent = new Intent(mContext, MainActivity.class);
                 mContext.startActivity(intent);
                 ((Activity) mContext).finish();

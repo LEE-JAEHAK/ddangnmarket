@@ -13,6 +13,4 @@ public interface NicknameRetrofitInterface {
     @POST("/user")
     Call<LoginResponse> postNickname(@Body RequestNickname params);
 
-    @POST("/jwt")
-    Call<LoginResponse> postJwt(@Body RequestJwt params);
 }

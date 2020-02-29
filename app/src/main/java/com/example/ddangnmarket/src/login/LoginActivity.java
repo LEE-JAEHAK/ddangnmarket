@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.login.interfaces.LoginActivityView;
+import com.example.ddangnmarket.src.login.models.LoginResponse;
 import com.example.ddangnmarket.src.login.models.RequestJwt;
 import com.example.ddangnmarket.src.login.models.RequestMessage;
 import com.example.ddangnmarket.src.login.models.RequestPhoneCert;
@@ -122,22 +123,16 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     }
 
     @Override
-    public void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt) {
+    public void validateJwtSuccess(boolean isSuccess, int code, String message, LoginResponse.Result result) {
         hideProgressDialog();
         if (isSuccess) {
             if (code == 100) {
                 showCustomToast(message);
 
-//                SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
-
-//                sSharedPreferences;
                 SharedPreferences.Editor editor = sSharedPreferences.edit();
-                editor.putString(X_ACCESS_TOKEN,jwt);
-                System.out.println("jwt 넣기 : " + jwt);
+                editor.putString(X_ACCESS_TOKEN,result.getJwt());
+                editor.putInt("userNo",result.getUserNo().get(0).getUserNo());
                 editor.commit();
-
-                final String jwtToken = sSharedPreferences.getString(X_ACCESS_TOKEN, null);
-                System.out.println("Interceptor : " + jwtToken);
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

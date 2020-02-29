@@ -58,11 +58,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/ic_user_profile_placeholder" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/profile_iv_change_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/ic_user_profile_placeholder" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:src="@drawable/icon_camera" />
+                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -83,8 +97,7 @@
                         android:id="@+id/profile_tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="청라1동" />
+                        android:layout_marginTop="10dp" />
                 </LinearLayout>
 
                 <TextView
@@ -191,6 +204,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/profile_btn_change_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

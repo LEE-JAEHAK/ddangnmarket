@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.main.MainActivity;
@@ -27,6 +29,7 @@ public class HomeFragment extends Fragment implements ItemActivityView {
     ListView mLvItemsList;
     ItemsAdapter itemsAdapter;
     ArrayList<ResultProduct> mResultProducts = new ArrayList<>();
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -45,7 +48,7 @@ public class HomeFragment extends Fragment implements ItemActivityView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        String dong = sSharedPreferences.getString("dong", "");
+        final String dong = sSharedPreferences.getString("dong", "");
 
         TextView mTvDong = view.findViewById(R.id.home_fragment_tv_dong);
         mTvDong.setText(dong);
@@ -55,6 +58,15 @@ public class HomeFragment extends Fragment implements ItemActivityView {
         mLvItemsList.setAdapter(itemsAdapter);
 
         getItem(dong, 1);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getItem(dong, 1);
+            }
+        });
+
 
         return view;
     }
@@ -67,6 +79,7 @@ public class HomeFragment extends Fragment implements ItemActivityView {
     @Override
     public void validateItemSuccess(boolean isSuccess, int code, String message, ArrayList<ResultProduct> resultProducts) {
         if (isSuccess) {
+            swipeRefreshLayout.setRefreshing(false);
             if (code == 100) {
                 //activity.showCustomToast(message);
 

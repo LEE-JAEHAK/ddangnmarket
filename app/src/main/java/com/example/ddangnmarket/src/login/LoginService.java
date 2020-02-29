@@ -68,17 +68,14 @@ public class LoginService {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 final LoginResponse loginResponse = response.body();
                 if (loginResponse == null) {
-                    System.out.println("리스폰스가 눌값");
                     mLoginActivityView.validateJwtFailure();
                     return;
                 }
-                System.out.println("LoginService 썩쎄스");
-                mLoginActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult().getJwt());
+                mLoginActivityView.validateJwtSuccess(loginResponse.getIsSuccess(), loginResponse.getCode(), loginResponse.getMessage(), loginResponse.getResult());
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                System.out.println("온페일리어");
                 mLoginActivityView.validateJwtFailure();
             }
         });

@@ -1,5 +1,7 @@
 package com.example.ddangnmarket.src.login.interfaces;
 
+import com.example.ddangnmarket.src.login.models.LoginResponse;
+
 public interface LoginActivityView {
     void validateMessageSuccess(boolean isSuccess, int code, String message);
 
@@ -9,7 +11,7 @@ public interface LoginActivityView {
 
     void validatePhoneCertFailure();
 
-    void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt);
+    void validateJwtSuccess(boolean isSuccess, int code, String message, LoginResponse.Result result);
 
     void validateJwtFailure();
 }

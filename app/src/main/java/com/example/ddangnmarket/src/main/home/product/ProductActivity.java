@@ -1,25 +1,22 @@
 package com.example.ddangnmarket.src.main.home.product;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
-import com.example.ddangnmarket.src.location.LocationAdapter;
+import com.example.ddangnmarket.src.main.chat.ChatActivity;
 import com.example.ddangnmarket.src.main.home.product.interfaces.ProductActivityView;
 import com.example.ddangnmarket.src.main.home.product.models.ProductAnotherResponse;
 import com.example.ddangnmarket.src.main.home.product.models.ProductImageResponse;
@@ -37,6 +34,7 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     private ArrayList<String> mImageList;
     ImageView mImageView;
     ImageButton mBack, mShare, mMore;
+    Button mBtnPurchase;
     TextView mTvNickname, mTvAddress, mTvManner, mTvtitle, mTvCategories, mTvReroll, mTvText, mTvChat, mTvFavorite, mTvHits, mTvPrice, mTvNicknameAnother;
     int productNo;
     ViewPager mViewPager;
@@ -65,6 +63,7 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
         mGridView = findViewById(R.id.product_information_gridview);
         mTvNicknameAnother = findViewById(R.id.product_information_tv_nickname_another);
         mScrollView = findViewById(R.id.product_information_scrollview);
+        mBtnPurchase = findViewById(R.id.product_information_btn_purchase);
 
 
         mBack = findViewById(R.id.product_information_iv_back);
@@ -118,6 +117,9 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
             case R.id.product_information_iv_more:
                 // more();
                 break;
+            case R.id.product_information_btn_purchase:
+                purchase(productNo);
+                break;
             default:
                 break;
         }
@@ -126,6 +128,12 @@ public class ProductActivity extends BaseActivity implements ProductActivityView
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public void purchase(int productNo) {
+        Intent intent = new Intent(ProductActivity.this, ChatActivity.class);
+        intent.putExtra("productNo", productNo);
+        startActivity(intent);
     }
 
     public void getProduct(int productNo) {

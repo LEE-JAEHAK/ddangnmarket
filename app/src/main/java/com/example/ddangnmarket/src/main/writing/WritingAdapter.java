@@ -27,6 +27,7 @@ public class WritingAdapter extends RecyclerView.Adapter<WritingAdapter.ViewHold
     @Override
     public WritingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.upload_image,parent,false);
+
         return new ViewHolder(view);
     }
 
@@ -47,6 +48,7 @@ public class WritingAdapter extends RecyclerView.Adapter<WritingAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mIvImage =itemView.findViewById(R.id.writing_iv_upload_image);
+            mIvImage.setClipToOutline(true);
         }
     }
 }

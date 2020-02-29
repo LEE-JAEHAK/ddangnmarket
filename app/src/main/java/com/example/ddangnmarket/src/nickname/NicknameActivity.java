@@ -13,6 +13,7 @@ import com.example.ddangnmarket.R;
 import com.example.ddangnmarket.src.BaseActivity;
 import com.example.ddangnmarket.src.login.LoginActivity;
 import com.example.ddangnmarket.src.login.LoginService;
+import com.example.ddangnmarket.src.login.models.LoginResponse;
 import com.example.ddangnmarket.src.login.models.RequestJwt;
 import com.example.ddangnmarket.src.nickname.interfaces.NicknameActivityView;
 import com.example.ddangnmarket.src.nickname.models.RequestNickname;
@@ -87,20 +88,17 @@ public class NicknameActivity extends BaseActivity implements NicknameActivityVi
     }
 
     @Override
-    public void validateJwtSuccess(boolean isSuccess, int code, String message, String jwt) {
+    public void validateJwtSuccess(boolean isSuccess, int code, String message, LoginResponse.Result result) {
         hideProgressDialog();
         if (isSuccess) {
             if (code == 100) {
                 showCustomToast(message);
 
-                //SharedPreferences sharedPreferences = getSharedPreferences("X-ACCESS-TOKEN", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sSharedPreferences.edit();
-                editor.putString("X-ACCESS-TOKEN", jwt);
+                editor.putString("X-ACCESS-TOKEN", result.getJwt());
                 editor.putString("nickname", mEtNickname.getText().toString());
+                editor.putInt("userNo",result.getUserNo().get(0).getUserNo());
                 editor.commit();
-
-                System.out.println("jwt 넣기 " + jwt);
-                System.out.println("nickname : " + mEtNickname.getText().toString());
 
                 Intent intent = new Intent(NicknameActivity.this, MainActivity.class);
                 startActivity(intent);
