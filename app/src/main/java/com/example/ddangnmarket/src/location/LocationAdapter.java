@@ -71,8 +71,10 @@ public class LocationAdapter extends BaseAdapter {
                 editor.putString("dong", dong);
                 editor.commit();
                 System.out.println("locationAdapter locationNo : " + mLocationNo + " , dong : " + dong);
-                if(sSharedPreferences.getString(X_ACCESS_TOKEN,"").equals("")){}
-                else{locationActivity.locationChange(mLocationNo);}
+                if (sSharedPreferences.getString(X_ACCESS_TOKEN, "").equals("")) {
+                } else {
+                    locationActivity.locationChange(mLocationNo);
+                }
                 Intent intent = new Intent(mContext, MainActivity.class);
                 mContext.startActivity(intent);
                 ((Activity) mContext).finish();
